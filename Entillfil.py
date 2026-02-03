@@ -8,11 +8,14 @@ data["increase_stock"] = data["increase_stock"].map({
     "high_bike_demand": 1,
 })
 
-hourly_mean = data.groupby("precip")["increase_stock"].mean()
-hourly_mean.plot(kind='bar')                                 
-#data.plot(x='hour_of_day', y='increase_stock', kind='hist')
-plt.ylabel("Mean of increase stock")
-plt.title("Mean of increase stock depending on the precipitation")
-plt.show()
+print_values = ["hour_of_day ", "day_of_week", "month", "holiday", "weekday", "precip", "snow"]
+
+for value in print_values:
+    hourly_mean = data.groupby("precip")["increase_stock"].mean()
+    hourly_mean.plot(kind='bar')                                 
+    #data.plot(x='hour_of_day', y='increase_stock', kind='hist')
+    plt.ylabel("Mean of increase stock")
+    plt.title("Mean of increase stock depending on the precipitation")
+    plt.show()
 
 print(data["precip"])
