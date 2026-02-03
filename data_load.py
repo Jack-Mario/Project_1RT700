@@ -5,6 +5,6 @@ def read_data():
     df = pd.read_csv("training_data_VT2026.csv")
     y = df["increase_stock"]
     x = df.drop(columns=["increase_stock"])
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=0)
     #print(x_train, y_train)
     return x_train, x_test, y_train, y_test
