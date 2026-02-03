@@ -3,11 +3,13 @@ import numpy as np
 import sklearn
 import seaborn as sns
 from data_load import read_data
+import pandas as df
 
 
 from sklearn.preprocessing import StandardScaler
 from sklearn.metrics import accuracy_score, confusion_matrix
 from sklearn.ensemble import RandomForestClassifier
+
 
 def randomforest():
     x_train, x_test, y_train, y_test = read_data()
@@ -17,5 +19,23 @@ def randomforest():
 
     accuracy= accuracy_score(y_test, y_pred)
     print(f'Accuracy: {accuracy * 100:.2f}%')
+
+    conf_matrix = confusion_matrix(y_test, y_pred)
+    plt.figure(figsize=(8,6))
+    sns.heatmap(conf_matrix)
+
+    plt.title('Confusion Matrix Heatmap')
+    plt.xlabel('Predicted Labels')
+    plt.ylabel('True Labels')
+    plt.show()
+
+    feature_importaces = classifier.feature_importances_
+    header = x_test.columns
+    plt.barh(header, feature_importaces)
+    plt.xlabel('Feature importance')
+    plt.title('Feature importance in Random Forest Classifier')
+
+    plt.show()
+
 
 randomforest()
