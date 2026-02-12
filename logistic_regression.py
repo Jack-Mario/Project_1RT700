@@ -9,8 +9,6 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 from sklearn.model_selection import GridSearchCV
 from data_load import read_data
 
-x_train, x_test, y_train, y_test = read_data()
-
 def logistic_regression(x_train, x_test, y_train, y_test):
     clf = make_pipeline(
         StandardScaler(),
@@ -31,5 +29,3 @@ def logistic_regression(x_train, x_test, y_train, y_test):
 
     performance_metrics = [accuracy_score(y_test, y_pred), f1_score(y_test, y_pred), precision_score(y_test, y_pred), recall_score(y_test, y_pred)]
     return performance_metrics
-
-print(logistic_regression(x_train, x_test, y_train, y_test))
