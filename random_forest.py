@@ -15,7 +15,7 @@ def randomforest(x_train, x_test, y_train, y_test):
     y_pred = classifier.predict(x_test)
 
     accuracy= accuracy_score(y_test, y_pred)
-    print(f'Accuracy: {accuracy * 100:.2f}%')
+    #print(f'Accuracy: {accuracy * 100:.2f}%')
 
     tree_to_plot = classifier.estimators_[0]
     plt.figure(figsize=(20, 10))
@@ -24,7 +24,7 @@ def randomforest(x_train, x_test, y_train, y_test):
     #plot_tree(tree_to_plot, filled=True, rounded=True, fontsize=10)
     
     plt.title("Decision Tree from Random Forest")
-    #plt.show()
+    plt.show()
     performance_metrics = [accuracy_score(y_test, y_pred), f1_score(y_test, y_pred), precision_score(y_test, y_pred), recall_score(y_test, y_pred)]
     return performance_metrics
 
