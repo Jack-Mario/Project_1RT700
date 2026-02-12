@@ -2,16 +2,13 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn.neighbors import KNeighborsClassifier
 import seaborn as sns
-from data_load import read_data
+from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 
-def train_knn():
+def train_knn(x_train, x_test, y_train, y_test):
     K = []
     training = []
     test = []
     scores = {}
-
-    x_train, x_test, y_train, y_test = read_data()
-    #print(x_train, y_train)
 
     for k in range(1,200,5):
         clf = KNeighborsClassifier(n_neighbors = k)
@@ -40,4 +37,5 @@ def train_knn():
     plt.plot(K, test, color='g')
     plt.show()
 
-train_knn()
+    performance_metrics = [accuracy_score(y_test, y_pred), f1_score(y_test, y_pred), precision_score(y_test, y_pred), recall_score(y_test, y_pred)]
+    return performance_metrics
