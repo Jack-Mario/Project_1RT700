@@ -24,7 +24,7 @@ def randomforest(x_train, x_test, y_train, y_test):
     #plot_tree(tree_to_plot, filled=True, rounded=True, fontsize=10)
     
     plt.title("Decision Tree from Random Forest")
-    plt.show()
+    #plt.show()
     performance_metrics = [accuracy_score(y_test, y_pred), f1_score(y_test, y_pred), precision_score(y_test, y_pred), recall_score(y_test, y_pred)]
     return performance_metrics
 
