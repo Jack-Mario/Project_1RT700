@@ -19,11 +19,11 @@ def logistic_regression(x_train, x_test, y_train, y_test):
     "logisticregression__penalty": ["l2"]
 }
 
-    grid = GridSearchCV(clf, param_grid, scoring = "accuracy", cv=3)
-    grid.fit(x_train, y_train)
+    GS_lr = GridSearchCV(clf, param_grid, scoring = "accuracy", cv=3, n_jobs = -1)
+    GS_lr.fit(x_train, y_train)
 
-    print("Best parameters:", grid.best_params_)
-    best_model = grid.best_estimator_
+    print("Best parameters:", GS_lr.best_params_)
+    best_model = GS_lr.best_estimator_
     y_pred = best_model.predict(x_test)
 
 
