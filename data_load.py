@@ -20,7 +20,8 @@ def read_data():
     scaler = StandardScaler()
     x = scaler.fit_transform(x)
 
-    #Skapa test och träningsdata
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2)
+    #Skapa test och träningsdata, test_size bestämmer storlek på test data (%)
+    #Stratify ser till att proportionen test/träning är samma i våra folds
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, stratify = y)
     #print(x_train, y_train)
     return x_train, x_test, y_train, y_test
