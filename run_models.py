@@ -5,11 +5,11 @@ from logistic_regression import logistic_regression
 from naive_model import naive_model
 
 x_train, x_test, y_train, y_test = read_data()
+width = 100
 
-print(f"{'=' * 80}\n")
-print(f"Randomforest data: {randomforest(x_train, x_test, y_train, y_test)}\n {'=' * 80}")
-#print(f"KNN data: {train_knn(x_train, x_test, y_train, y_test)}\n {'=' * 80}")
-#print(f"naive model data: {naive_model(x_train, x_test, y_train, y_test)}\n {'=' * 80}")
-print(f"Logistic regression data: {logistic_regression(x_train, x_test, y_train, y_test)}\n {'=' * 80}")
+functions = [randomforest, train_knn, logistic_regression, naive_model] 
 
-
+for func in functions:
+    print(f"{len(str(func)) * " "} accuracy_score | f1_score | precision_score | recall_score")
+    print(f"{func} Data: {func(x_train, x_test, y_train, y_test)}\n")
+    print(f"{'=' * width}\n")
