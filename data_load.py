@@ -1,8 +1,10 @@
 from sklearn.model_selection import train_test_split
 import pandas as pd
-from sklearn.preprocessing import StandardScaler 
+from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
-def read_data():
+def read_data(): 
+    #TODO Skala datan efter den är delad!!
+
     #Importera data
     df = pd.read_csv("training_data_VT2026.csv")
 
@@ -16,12 +18,28 @@ def read_data():
     y = df["increase_stock"]
     x = df.drop(columns=["increase_stock"])
 
-    #Skala om x
+    categorical_columns = ['hour_of_day', 'day_of_week', 'month', 'holiday', 'weekday', 'summertime']
+    categorical_data = x[categorical_columns]
+    encoder = OneHotEncoder(sparse_output=False)
+    one_hot_encoded = encoder.fit_transform(categorical_data)
+    one_hot_df = pd.DataFrame(
+        one_hot_encoded,
+        columns=encoder.get_feature_names_out(categorical_columns)
+    )
+
+    x = pd.concat([x, one_hot_df], axis = 1)
+    x = x.drop(columns=categorical_columns)
+
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, stratify = y)
+    
     scaler = StandardScaler()
-    x = scaler.fit_transform(x)
+    x_train = scaler.fit_transform(x_train)
+    x_test = scaler.fit_transform(x_test)
+    y_train = scaler.fit_transform(y_train)
+    y_test = scaler.fit_transform(y_test)
 
     #Skapa test och träningsdata, test_size bestämmer storlek på test data (%)
     #Stratify ser till att proportionen test/träning är samma i våra folds
-    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, stratify = y)
+    
     #print(x_train, y_train)
     return x_train, x_test, y_train, y_test
