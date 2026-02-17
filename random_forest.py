@@ -11,14 +11,14 @@ def randomforest(x_train, x_test, y_train, y_test):
                   'max_features' : ['sqrt', 'log2'],
                   'max_depth' : [11],
     }
-    #Skapar och tränar KNN model baserat på grid_params, baserat på accuracy
+    #Skapar och tränar RF model baserat på grid_params, baserat på accuracy
     #n_jobs = -1 är för att vi ska köra så många träd som möjligt samtidigt
     GS_rf = GridSearchCV(estimator = RandomForestClassifier(), param_grid = param_grid, cv = 3, scoring = 'accuracy', n_jobs = -1)
     GS_rf.fit(x_train, y_train)
 
     #Får bästa parametrar, samt om man vill bästa score (MODELLNAMN.best_score_)
     #Printen gör att vi kan uppdatera GridSearch, när det blir många parametrar blir det väldigt data-tungt
-    print(GS_rf.best_params_)
+    print(f"Best params: {GS_rf.best_params_}")
 
     #Skapar en ny model med de bästa parametrarna och kör testdata
     #Man måste köra "fit" då det är en ny modell som skapas

@@ -3,8 +3,6 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 def read_data(): 
-    #TODO Skala datan efter den är delad!!
-
     #Importera data
     df = pd.read_csv("training_data_VT2026.csv")
 
@@ -35,8 +33,6 @@ def read_data():
     scaler = StandardScaler()
     x_train = scaler.fit_transform(x_train)
     x_test = scaler.fit_transform(x_test)
-    y_train = scaler.fit_transform(y_train)
-    y_test = scaler.fit_transform(y_test)
 
     #Skapa test och träningsdata, test_size bestämmer storlek på test data (%)
     #Stratify ser till att proportionen test/träning är samma i våra folds

@@ -3,7 +3,6 @@ from sklearn.metrics import accuracy_score
 from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_score
 from sklearn.model_selection import GridSearchCV
 
-
 def logistic_regression(x_train, x_test, y_train, y_test):
     #De parametrat vi loopar igenom
     #Tog bort "logisticregression__penalty": ["l2"] ur param_grid pga varningar
