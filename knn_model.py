@@ -5,8 +5,7 @@ from sklearn.metrics import accuracy_score, f1_score, precision_score, recall_sc
 def train_knn(x_train, x_test, y_train, y_test):
     #De parametrat vi loopar igenom
     grid_params = {'n_neighbors' : [15, 75, 80, 85],
-                   'weights' : ['uniform', 'distance'],
-                   'metric' : ['minkowski','euclidean','manhattan']}
+                   'weights' : ['uniform', 'distance']}
     
     #Skapar och tränar KNN model baserat på grid_params, baserat på accuracy
     GS_knn = GridSearchCV(KNeighborsClassifier(), grid_params, verbose = 1, cv=3, n_jobs = -1, scoring = 'accuracy')
