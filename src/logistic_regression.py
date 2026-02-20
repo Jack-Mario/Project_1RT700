@@ -9,7 +9,7 @@ def logistic_regression(x_train, x_test, y_train, y_test):
 
     # TODO Ska vi ha random_state = 0?
     param_grid = {
-    "C": [100],
+    "C": [0.01, 0.1, 1, 10, 100],
     'max_iter' : [1000]
     }
 

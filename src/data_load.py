@@ -1,10 +1,13 @@
+from pathlib import Path
+
 from sklearn.model_selection import train_test_split
 import pandas as pd
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
 def read_data(): 
     #Importera data
-    df = pd.read_csv("training_data_VT2026.csv")
+    data_path = Path(__file__).with_name("training_data_VT2026.csv")
+    df = pd.read_csv(data_path)
 
     #Gör vår "klass" kolumn numrerisk
     df["increase_stock"] = df["increase_stock"].map({

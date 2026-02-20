@@ -7,9 +7,9 @@ from sklearn.ensemble import RandomForestClassifier
 
 def randomforest(x_train, x_test, y_train, y_test):
     #De parametrat vi loopar igenom
-    param_grid = { 'n_estimators' : [150],
+    param_grid = { 'n_estimators' : [50, 75, 100, 125, 150],
                   'max_features' : ['sqrt', 'log2'],
-                  'max_depth' : [11],
+                  'max_depth' : [5, 7, 9, 11, 15],
     }
     #Skapar och tränar RF model baserat på grid_params, baserat på accuracy
     #n_jobs = -1 är för att vi ska köra så många träd som möjligt samtidigt

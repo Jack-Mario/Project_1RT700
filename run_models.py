@@ -1,8 +1,8 @@
-from random_forest import randomforest
-from knn_model import train_knn
-from data_load import read_data
-from logistic_regression import logistic_regression
-from naive_model import naive_model
+from src.random_forest import randomforest
+from src.knn_model import train_knn
+from src.data_load import read_data
+from src.logistic_regression import logistic_regression
+from src.naive_model import naive_model
 
 x_train, x_test, y_train, y_test = read_data()
 width = 100
