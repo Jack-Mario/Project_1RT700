@@ -2,49 +2,44 @@
 Authors: Jack Bossel, David Olson, and Tim Slettenmark Gille
 
 ## Overview
-This repository contains a small machine learning workflow for classifying bike demand into two classes: low or high. The project reads a CSV dataset, splits it into train and test sets, trains multiple models, and reports common classification metrics.
+This repository contains a machine learning workflow for classifying bike demand into two classes: low or high. The project uses multiple classification models with hyperparameter tuning via GridSearchCV to find optimal parameters. It includes both model evaluation on validation data and prediction generation for unseen test data.
 
-The main entry point is `run_models.py`, which loads the data and runs the selected models.
+The main entry point is `run_models.py`, which orchestrates data loading, model training, evaluation, and prediction.
 
 ## Dataset
-- File: `training_data_VT2026.csv`
-- Target column: `increase_stock`
-- Target mapping: `low_bike_demand` -> 0, `high_bike_demand` -> 1
+- **Training data**: `training_data_VT2026.csv`
+- **Test data**: `test_data_VT2026.csv`
+- **Target column**: `increase_stock`
+- **Target mapping**: `low_bike_demand` → 0, `high_bike_demand` → 1
+- **Categorical features**: hour_of_day, day_of_week, month, holiday, weekday, summertime
 
-## Project structure
-- `data_load.py`: loads the dataset and performs the train/test split
-- `run_models.py`: entry point for running models
-- `random_forest.py`: random forest with grid search
-- `knn_model.py`: k-nearest neighbors with grid search
-- `logistic_regression.py`: logistic regression with grid search
-- `naive_model.py`: baseline model
-- `ploting_data.py`: plotting utilities (if used)
-- `Graphs/`: output plots (if generated)
+## Data Preprocessing
 
-## Setup
-1. Install dependencies:
-	- `pandas`
-    - `numpy`
-    - `scikit-learn`
-    - `matplotlib`
-    - `seaborn` if confusionmatrix is used
-2. Make sure `training_data_VT2026.csv` is in the project root.
+Both training and test data undergo the following preprocessing steps:
 
-## Run
-From the project root:
-- `python run_models.py`
+1. **One-Hot Encoding**: Categorical features are encoded using `OneHotEncoder`
+2. **Feature Scaling**: All features are standardized using `StandardScaler`
+3. **Train/Test Split**: Training data is split 80/20 with stratification to maintain class balance
 
-You can toggle which models run by commenting lines in `run_models.py`.
+## Models
 
-## Output
-Each model returns or prints standard classification metrics, such as:
-- Accuracy
-- F1 score
-- Precision
-- Recall
+All models use `GridSearchCV` with 3-fold cross-validation to optimize hyperparameters:
 
-The random forest script can also generate a decision tree plot.
+1. **K-Nearest Neighbors (KNN)**
+   - Parameters: `n_neighbors` (7, 9, 10, 12), `weights` (uniform, distance)
+   - Optimized for F1 score
 
-## Notes
-- Grid searches can be slow; reduce the parameter grid or use fewer CV folds if needed.
-- If you see errors related to `max_features='auto'`, switch to `sqrt` or `log2` in newer scikit-learn versions.
+2. **Random Forest**
+   - Parameters: `n_estimators`, `max_depth`, `max_features`
+   - Optimized for accuracy
+
+3. **Logistic Regression**
+   - Tuned regularization and solver parameters
+
+4. **Naive Model**
+   - Baseline for comparison
+
+### Predictions
+- Predictions for test data are saved to `predictions.csv`
+- Contains one column: `prediction` (0 or 1)
+- Generated using the best KNN model
