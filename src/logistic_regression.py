@@ -15,7 +15,7 @@ def logistic_regression(x_train, x_test, y_train, y_test):
 
     #Skapar och tränar KNN model baserat på grid_params, baserat på accuracy
     #n_jobs = -1 är för att vi ska köra så många träd som möjligt samtidigt
-    GS_lr = GridSearchCV(LogisticRegression(), param_grid, scoring = "accuracy", cv=3, n_jobs = -1)
+    GS_lr = GridSearchCV(LogisticRegression(), param_grid, scoring = "f1", cv=3, n_jobs = -1)
     GS_lr.fit(x_train, y_train)
 
     #Får bästa parametrar, samt om man vill bästa score (MODELLNAMN.best_score_)

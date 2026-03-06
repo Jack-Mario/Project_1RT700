@@ -13,7 +13,7 @@ def randomforest(x_train, x_test, y_train, y_test):
     }
     #Skapar och tränar RF model baserat på grid_params, baserat på accuracy
     #n_jobs = -1 är för att vi ska köra så många träd som möjligt samtidigt
-    GS_rf = GridSearchCV(estimator = RandomForestClassifier(), param_grid = param_grid, cv = 3, scoring = 'accuracy', n_jobs = -1)
+    GS_rf = GridSearchCV(estimator = RandomForestClassifier(), param_grid = param_grid, cv = 3, scoring = 'f1', n_jobs = -1)
     GS_rf.fit(x_train, y_train)
 
     #Får bästa parametrar, samt om man vill bästa score (MODELLNAMN.best_score_)

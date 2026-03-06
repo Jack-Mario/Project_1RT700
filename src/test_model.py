@@ -1,5 +1,6 @@
 from sklearn.neighbors import KNeighborsClassifier
 import pandas as pd
+import os
 
 def test_knn(x_train, y_train, test_data):
     n_neighbors = 10
@@ -11,5 +12,9 @@ def test_knn(x_train, y_train, test_data):
 
     df_pred = pd.DataFrame(y_pred, columns=['prediction'])
 
-    return df_pred.to_csv('predictions.csv', columns=['prediction'], index = False)
+    predictions_str = ','.join(map(str, y_pred))
+    csv_path = os.path.join(os.path.dirname(__file__), '..', 'predictions.csv')
+    with open(csv_path, 'w') as f:
+        f.write(predictions_str)
+    return None
     
